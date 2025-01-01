@@ -34,5 +34,6 @@ export function productValidation(product: IErrors) {
   if (!product.price.trim() || isNaN(Number(product.price))) {
     errors.price = "Invalid price";
   }
+
   return errors;
 }
