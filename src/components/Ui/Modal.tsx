@@ -5,12 +5,14 @@ interface IModalProps {
   title?: string;
   children: ReactNode;
   closeModal: () => void;
+  description?: string;
 }
 export default function Modal({
   isOpen,
   title,
   children,
   closeModal,
+  description,
 }: IModalProps) {
   return (
     <>
@@ -48,6 +50,11 @@ export default function Modal({
                       >
                         {title}
                       </Dialog.Title>
+                    )}
+                    {description && (
+                      <p className="text-sm text-gray-500 my-3">
+                        {description}
+                      </p>
                     )}
                     {children}
                   </Dialog.Panel>

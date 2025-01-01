@@ -23,6 +23,7 @@ function App() {
   /* ------- STATE -------  */
   const [isOpen, setIsOpen] = useState(false);
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
   const [productEdit, setProductEdit] = useState<IProduct>(defaultProduct);
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
@@ -48,6 +49,14 @@ function App() {
   }
   function openModal() {
     setIsOpen(true);
+  }
+  function openConfirmModal() {
+    setProductEdit(product);
+    setIsOpenConfirmModal(true);
+  }
+  function closeConfirmModal() {
+    setIsOpenConfirmModal(false);
+    setProductEdit(defaultProduct);
   }
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -143,6 +152,13 @@ function App() {
     setTempColors([]);
     closeEditModal();
   }
+  function removeProductHandler() {
+    const updatedProducts = products.filter(
+      (product) => product.id !== productEdit?.id
+    );
+    setProducts(updatedProducts);
+    closeConfirmModal();
+  }
   /* ------- RENDER -------  */
   const renderProductsList = products?.map((product) => {
     return (
@@ -151,6 +167,7 @@ function App() {
         product={product}
         setProductEdit={setProductEdit}
         openEditModal={openEditModal}
+        openConfirmModal={openConfirmModal}
       />
     );
   });
@@ -331,6 +348,30 @@ function App() {
         </form>
       </Modal>
       {/* End  Edit Product Modal */}
+      {/* Start Delete Product Modal */}
+      <Modal
+        isOpen={isOpenConfirmModal}
+        closeModal={closeConfirmModal}
+        title="Are you sure you want to remove this Product from your Store?"
+        description="Deleting this product will remove it permanently from your inventory. Any associated data, sales history, and other related information will also be deleted. Please make sure this is the intended action."
+      >
+        <div className="flex items-center space-x-3">
+          <Button
+            className="bg-[#c2344d] hover:bg-red-800"
+            onClick={removeProductHandler}
+          >
+            Yes, remove
+          </Button>
+          <Button
+            type="button"
+            className="bg-[#f5f5fa] hover:bg-gray-300 !text-black"
+            onClick={closeConfirmModal}
+          >
+            Cancel
+          </Button>
+        </div>
+      </Modal>
+      {/* End Delete Product Modal */}
     </main>
   );
 }

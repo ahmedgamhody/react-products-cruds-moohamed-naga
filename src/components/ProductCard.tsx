@@ -8,16 +8,23 @@ interface IProductCardProps {
   product: IProduct;
   setProductEdit: (product: IProduct) => void;
   openEditModal: () => void;
+  openConfirmModal: () => void;
 }
 export default function ProductCard({
   product,
   setProductEdit,
   openEditModal,
+  openConfirmModal,
 }: IProductCardProps) {
   const { title, description, imageURL, price, colors, category } = product;
   function onEditHandler() {
     setProductEdit(product);
     openEditModal();
+  }
+
+  function onDestroyHandler() {
+    openConfirmModal();
+    setProductEdit(product);
   }
   return (
     <div className="border rounded-md p-2 flex flex-col max-w-sm md:max-w-lg">
@@ -45,7 +52,9 @@ export default function ProductCard({
           Edit
         </Button>
 
-        <Button className=" bg-orange-500">Destroy</Button>
+        <Button className=" bg-orange-500" onClick={onDestroyHandler}>
+          Destroy
+        </Button>
       </div>
     </div>
   );
