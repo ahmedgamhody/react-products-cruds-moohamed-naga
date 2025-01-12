@@ -60,18 +60,23 @@ function App() {
     setIsOpenConfirmModal(false);
     setProductEdit(defaultProduct);
   }
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = e.target;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: value,
-    }));
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: "",
-    }));
-  }
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        [name]: value,
+      }));
+
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: "",
+      }));
+    },
+    []
+  );
+
   function handleEditChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setProductEdit((prevProduct) => ({
