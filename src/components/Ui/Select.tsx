@@ -11,11 +11,12 @@ import { ChevronUpDownIcon } from "@heroicons/react/16/solid";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { categories } from "../../data";
 import { ICategory } from "../../interfaces";
+import { memo } from "react";
 interface ISelectProps {
   selected: { name: string; imageURL: string };
   setSelected: (category: ICategory) => void;
 }
-export default function Select({ selected, setSelected }: ISelectProps) {
+function Select({ selected, setSelected }: ISelectProps) {
   return (
     <Listbox value={selected} onChange={setSelected}>
       <Label className="block text-sm/6 font-medium text-gray-900">
@@ -68,3 +69,5 @@ export default function Select({ selected, setSelected }: ISelectProps) {
     </Listbox>
   );
 }
+
+export default memo(Select);

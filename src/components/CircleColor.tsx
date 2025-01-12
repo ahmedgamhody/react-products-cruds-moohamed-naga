@@ -1,7 +1,7 @@
 interface ICircleColorProps extends React.HTMLAttributes<HTMLSpanElement> {
   color: string;
 }
-export default function CircleColor({ color, ...rest }: ICircleColorProps) {
+function CircleColor({ color, ...rest }: ICircleColorProps) {
   return (
     <span
       style={{ backgroundColor: color }}
@@ -10,3 +10,5 @@ export default function CircleColor({ color, ...rest }: ICircleColorProps) {
     ></span>
   );
 }
+
+export default CircleColor;

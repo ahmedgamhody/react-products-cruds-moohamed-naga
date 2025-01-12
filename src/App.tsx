@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import Modal from "./components/Ui/Modal";
 import { categories, colors, formInputsList, productList } from "./data";
@@ -44,16 +44,18 @@ function App() {
     setIsModalEditOpen(false);
     setProductEdit(defaultProduct);
   }
-  function openEditModal() {
+  const openEditModal = useCallback(() => {
     setIsModalEditOpen(true);
-  }
+  }, []);
+
   function openModal() {
     setIsOpen(true);
   }
-  function openConfirmModal() {
+  const openConfirmModal = useCallback(() => {
     setProductEdit(product);
     setIsOpenConfirmModal(true);
-  }
+  }, []);
+
   function closeConfirmModal() {
     setIsOpenConfirmModal(false);
     setProductEdit(defaultProduct);

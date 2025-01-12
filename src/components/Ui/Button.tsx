@@ -1,11 +1,11 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, memo, ReactNode } from "react";
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   className?: string;
   width?: "w-full" | "w-fit";
 }
-export default function Button({
+function Button({
   children,
   className,
   width = "w-full",
@@ -20,3 +20,5 @@ export default function Button({
     </button>
   );
 }
+
+export default memo(Button);

@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, ReactNode } from "react";
+import { Fragment, memo, ReactNode } from "react";
 interface IModalProps {
   isOpen: boolean;
   title?: string;
@@ -7,7 +7,7 @@ interface IModalProps {
   closeModal: () => void;
   description?: string;
 }
-export default function Modal({
+function Modal({
   isOpen,
   title,
   children,
@@ -67,3 +67,5 @@ export default function Modal({
     </>
   );
 }
+
+export default memo(Modal);

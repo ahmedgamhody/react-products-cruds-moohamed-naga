@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { IProduct } from "../interfaces";
 import { textSlicer } from "../utils/functions";
 import CircleColor from "./CircleColor";
@@ -10,7 +11,7 @@ interface IProductCardProps {
   openEditModal: () => void;
   openConfirmModal: () => void;
 }
-export default function ProductCard({
+function ProductCard({
   product,
   setProductEdit,
   openEditModal,
@@ -59,3 +60,5 @@ export default function ProductCard({
     </div>
   );
 }
+
+export default memo(ProductCard);
